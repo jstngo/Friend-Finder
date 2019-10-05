@@ -33,17 +33,17 @@ var connection = mysql.createConnection({
 	host: 'localhost',
 	user: 'root',
 	password: 'superpassword',
-	database: 'prezidents_db'
+	database: 'friends_db'
 });
 
 connection.connect();
 
-app.get('/presidents', function (req, res) {
-	connection.query('SELECT * FROM presidents', function (error, results, fields) {
-		if (error) res.send(error)
-		else res.json(results);
-	});
-});
+// app.get('/survery', function (req, res) {
+// 	connection.query('SELECT * FROM questions', function (error, results, fields) {
+// 		if (error) res.send(error)
+// 		else res.json(results);
+// 	});
+// });
 
 // by default the forms use req.query so let's not fight it
 //localhost:3000/insert?pres_name=justin
@@ -54,8 +54,8 @@ app.get('/presidents', function (req, res) {
 app.post('/insert', function (req, res) {
 	// res.json(req.query);
 
-	if (req.body.pres_name.length > 1) {
-		connection.query('INSERT INTO presidents (pres_name) VALUES (?)', [req.body.pres_name], function (error, results, fields) {
+	if (req.body.data.name.length > 1) {
+		connection.query('INSERT INTO friends (nam) VALUES (?)', [req.body.data.name], function (error, results, fields) {
 			if (error) res.send(error)
 			else res.redirect('/');
 		});
@@ -64,35 +64,35 @@ app.post('/insert', function (req, res) {
 	}
 });
 
-//localhost:3000/remove?id=3
-app.delete('/delete', function (req, res) {
-	// res.json(req.body);
+// //localhost:3000/remove?id=3
+// app.delete('/delete', function (req, res) {
+// 	// res.json(req.body);
 
-	if (req.body.id) {
-		// ; DELETE FROM people;
-		// '1 AND DELETE FROM people'
-		connection.query('DELETE FROM presidents WHERE id = ?', [req.body.id], function (error, results, fields) {
-			if (error) res.send(error)
-			else res.redirect('/');
-		});
-	} else {
-		res.send('you need an id')
-	}
-});
+// 	if (req.body.id) {
+// 		// ; DELETE FROM people;
+// 		// '1 AND DELETE FROM people'
+// 		connection.query('DELETE FROM presidents WHERE id = ?', [req.body.id], function (error, results, fields) {
+// 			if (error) res.send(error)
+// 			else res.redirect('/');
+// 		});
+// 	} else {
+// 		res.send('you need an id')
+// 	}
+// });
 
-//localhost:3000/update?id=3&name=newname
-app.put('/update', function (req, res) {
-	// res.json(req.body);
+// //localhost:3000/update?id=3&name=newname
+// app.put('/update', function (req, res) {
+// 	// res.json(req.body);
 
-	if (req.body.id && req.body.pres_name.length > 1) {
-		connection.query('UPDATE presidents SET pres_name = ? WHERE id = ?', [req.body.pres_name, req.body.id], function (error, results, fields) {
-			if (error) res.send(error)
-			else res.redirect('/');
-		});
-	} else {
-		res.send('you need an id')
-	}
-});
+// 	if (req.body.id && req.body.pres_name.length > 1) {
+// 		connection.query('UPDATE presidents SET pres_name = ? WHERE id = ?', [req.body.pres_name, req.body.id], function (error, results, fields) {
+// 			if (error) res.send(error)
+// 			else res.redirect('/');
+// 		});
+// 	} else {
+// 		res.send('you need an id')
+// 	}
+// });
 
 
 
