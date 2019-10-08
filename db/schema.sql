@@ -7,6 +7,7 @@ USE friends_db;
 CREATE TABLE friends (
     id INT NOT NULL AUTO_INCREMENT, /* NOT NULL means that this column can not be empty, and it is called a constraint */
     nam VARCHAR(255),
+    pics VARCHAR(255),
     PRIMARY KEY(id) /* if you don't do line 11, you get an error */
 );
 
